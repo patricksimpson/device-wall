@@ -2,21 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   actions: {
-    addWall: function() {
-      var newWall = this.store.createRecord('wall', {
+    addDevice: function() {
+      var newDevice = this.store.createRecord('device', {
         name: this.get('name'),
-        masterUrl: this.get('masterUrl')
+        url: this.get('url')
       });
-      newWall.save();
+      newDevice.save();
       this.set('name', '');
-      this.set('masterUrl', '');
+      this.set('url', '');
       this.transitionToRoute('wall');
     },
     cancel: function() {
       this.set('name', '');
-      this.set('masterUrl', '');
+      this.set('url', '');
       this.transitionToRoute('wall');
     }
   }
-
 });

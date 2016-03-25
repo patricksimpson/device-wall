@@ -1,0 +1,12 @@
+{{outlet}}
+<h2> New Device </h2>
+<div>
+  {{input value=name placeholder="Name"}}
+</div>
+<div>
+  {{input value=url placeholder="url"}}
+</div>
+<div>
+  <input type="submit" {{action "addDevice"}} value="Add Device">
+  <button {{action "cancel"}}>Cancel</button>
+</div>
