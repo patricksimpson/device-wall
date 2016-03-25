@@ -1,2 +1,14 @@
 This is a wall, your wall, do what you will with your wall.
+
+{{#if model}}
+  {{#each model as |wall|}}
+  <h2>{{wall.name}}</h2>
+  {{/each}}
+{{else}}
+<div class="danger">
+  <p>You have no wall, add one.</p>
+</div>
+{{/if}}
+
+{{#link-to 'wall.new'}}Add Wall{{/link-to}}
 {{outlet}}
