@@ -6,6 +6,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('wall', { path: '/' });
+  this.route('device');
 });
 
 export default Router;
