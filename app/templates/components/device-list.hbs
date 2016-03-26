@@ -1,6 +1,6 @@
 {{yield}}
 <ul>
 {{#each devices as |device|}}
-  <li>{{#link-to 'device' wallId device.id}}{{device.name}}{{/link-to}}</li>
+  <li>{{#link-to 'device' device.id}}{{device.name}}{{/link-to}} | Edit | (<a href="{{device.url}}">{{device.url}}</a>)</li>
 {{/each}}
 </ul>
