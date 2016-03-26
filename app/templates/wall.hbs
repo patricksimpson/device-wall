@@ -1,7 +1,7 @@
 {{#if model}}
   {{#each model as |wall|}}
   <h2>{{wall.name}}</h2>
-  {{#link-to 'device.new'}}Add Device{{/link-to}}
+  {{#link-to 'wall.device.new' wall.id}}Add Device{{/link-to}}
   {{/each}}
 {{else}}
 <div class="danger">
