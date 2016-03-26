@@ -10,6 +10,7 @@ Router.map(function() {
     this.route('new');
     this.route('device', { path: '/:wall_id/devices' }, function() {
       this.route('new');
+      this.route('index', { path: ':device_id' });
     });
   });
 });

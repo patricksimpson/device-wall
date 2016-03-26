@@ -1,6 +1,12 @@
+{{yield}}
 {{#if model}}
   {{#each model as |wall|}}
   <h2>{{wall.name}}</h2>
+  <ul>
+  {{#each wall.devices as |device|}}
+    <li>{{#link-to 'wall.device' wall.id device.id}}{{device.name}}{{/link-to}}</li>
+  {{/each}}
+  </ul>
   {{#link-to 'wall.device.new' wall.id}}Add Device{{/link-to}}
   {{/each}}
 {{else}}
