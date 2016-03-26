@@ -1,22 +1,11 @@
-{{yield}}
 {{#if model}}
-  {{#each model as |wall|}}
-  <h2>{{wall.name}}</h2>
-  <ul>
-  {{#each wall.devices as |device|}}
-    <li>{{#link-to 'wall.device' wall.id device.id}}{{device.name}}{{/link-to}}</li>
-  {{/each}}
-  </ul>
-  {{#link-to 'wall.device.new' wall.id}}Add Device{{/link-to}}
-  {{/each}}
+  {{wall-list walls=model}}
 {{else}}
 <div class="danger">
   <p>You have no wall, add one.</p>
+  <div>
+    {{#link-to 'wall.new'}}Add Wall{{/link-to}}
+  </div>
 </div>
 {{/if}}
-<hr>
-<div>
-  {{#link-to 'wall.new'}}Add Wall{{/link-to}}
-</div>
-
 {{outlet}}
