@@ -1,0 +1,13 @@
+{{outlet}}
+<h2> Edit {{wall.name}}</h2>
+<div>
+    <label>Name: {{input value=wall.name placeholder="Name"}}</label>
+</div>
+<div>
+    <label>Master URL: {{input value=wall.masterUrl placeholder="url"}}</label>
+    <span class="note">Editing this URL will update all device URLs</span>
+</div>
+<div>
+    <input type="submit" {{action "editWall"}} value="Edit Wall">
+    <button {{action "cancel"}}>Cancel</button>
+</div>
