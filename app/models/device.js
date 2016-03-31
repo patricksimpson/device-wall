@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
 export default DS.Model.extend({
   name: DS.attr('string'),
@@ -6,3 +7,4 @@ export default DS.Model.extend({
   slug: DS.attr('string'),
   updated: DS.attr('number')
 });
+
