@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
       .replace(/-$/, '');             // Remove last floating dash if exists
   },
   actions: {
-    addDevice: function() {
+    editDevice: function() {
       var newDevice = this.store.createRecord('device', {
         name: this.get('name'),
         url: this.get('url'),
