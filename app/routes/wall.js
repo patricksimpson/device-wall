@@ -9,7 +9,7 @@ export default Ember.Route.extend({
       var tokenGenerator = new FirebaseTokenGenerator(config.firebaseSecret),
           token = tokenGenerator.createToken({ uid: '1', isAdmin: true });
       this.get('session').open('firebase', { provider: 'custom', token: token}).then(function(data) {
-        this.set('data', data);
+        console.log(data);
       });
     }
   },
