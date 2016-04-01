@@ -20,6 +20,21 @@ export default Ember.Controller.extend({
       });
       this.transitionToRoute('wall');
     },
+    deleteDevice() {
+      var device = this.get('model'),
+          wall = device.get('wall'),
+          _this = this;
+
+      if (wall) {
+        this.store.findRecord('wall', wall.get('id')).then(function(data) {
+          data.get('devices').removeObject(device);
+          data.save();
+          device.destroyRecord();
+          _this.transitionToRoute('wall');
+        });
+      }
+
+    },
     cancel() {
       this.transitionToRoute('wall');
     }
