@@ -5,8 +5,8 @@ export default Ember.Component.extend({
     edit() {
       this.sendAction('edit');
     },
-    editDevice() {
-      console.log('ok');
+    cancel() {
+      this.sendAction('cancel');
     }
   }
 });

@@ -9,15 +9,14 @@ export default Ember.Controller.extend({
       .replace(/-$/, '');             // Remove last floating dash if exists
   },
   actions: {
-    editDevice(d) {
+    editDevice() {
       var device = this.get('device');
       device.set('slug', this.slugify(device.get('name')));
+      device.set('updated', Date.now());
       device.save();
       this.transitionToRoute('wall');
     },
     cancel() {
-      this.set('name', '');
-      this.set('url', '');
       this.transitionToRoute('wall');
     }
   }
