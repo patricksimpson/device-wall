@@ -12,7 +12,7 @@ Router.map(function() {
   });
   this.route('device', { path: '/devices' }, function() {
     this.route('new', { path: '/:wall_id/new' });
-    this.route('index', { path: ':device_id' }, function() {
+    this.route('index', { path: ':device_slug' }, function() {
       this.route('edit');
     });
   });

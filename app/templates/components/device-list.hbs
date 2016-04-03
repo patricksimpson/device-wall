@@ -1,8 +1,8 @@
 {{yield}}
 <ul>
 {{#each devices as |device|}}
-  <li>{{#link-to 'device' device.id}}{{device.name}}{{/link-to}}
-  | {{#link-to 'device.index.edit' device.id}}Edit{{/link-to}}
+  <li>{{#link-to 'device' device.slug}}{{device.name}}{{/link-to}}
+  | {{#link-to 'device.index.edit' device.slug}}Edit{{/link-to}}
   | (<a href="{{device.url}}">{{device.url}}</a>)</li>
 {{/each}}
 </ul>
