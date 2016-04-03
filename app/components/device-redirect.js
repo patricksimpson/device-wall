@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   looper: null,
-  didInsertElement() {
+  didRender() {
     const url = this.get('device.url');
     let wait = 0;
     if (!Ember.isEmpty(url)) {
