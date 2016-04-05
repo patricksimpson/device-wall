@@ -2,31 +2,44 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   looper: null,
-  didRender() {
-    const url = this.get('device.url');
-    let wait = 0;
-    if (!Ember.isEmpty(url)) {
-      if (!Ember.isEmpty(window.document.referrer)) {
-        wait = 3000;
+  wait: 0,
+  isLocal: window.document.location.hostname === 'localhost',
+  referrer: window.document.referrer,
+  redirectInit: function() {
+    if (!Ember.isEmpty(this.get('device.url'))) {
+      if (!Ember.isEmpty(this.get('referrer'))) {
+        this.set('wait', 3000);
       }
-      if (document.location.hostname !== 'localhost') {
-        this.loop(url, wait);
+      if (!this.get('isLocal')) {
+        this.loop();
       } else {
-        this.manual();
+        this.set('wait', 5000);
+        this.loop();
+        // this.manual();
       }
     }
+  },
+  didRender() {
+    Ember.run.later(this, function() {
+      this.set('url', this.get('device.url'));
+    });
+  },
+  url: null,
+  urlObserver: Ember.observer('url', function(){
+    this.redirectInit();
+  }),
+  willDestroyElement() {
+    Ember.run.cancel(this.get('looper'));
   },
   manual() {
     this.set('message', 'Redirect disabled');
   },
-  loop(url, wait) {
-    this.looper = Ember.run.later(this, function() {
-      this.redirect(url);
-    }, wait);
+  loop() {
+    this.looper = Ember.run.later(this, this.get('redirect'), this.get('wait'));
   },
-  redirect(url) {
-    if (!Ember.isEmpty(url)) {
-      window.location.href = url;
+  redirect() {
+    if (!Ember.isEmpty(this.get('device.url'))) {
+      window.location.href = this.get('device.url');
     } else {
       this.set('message', 'Invalid URL');
     }
