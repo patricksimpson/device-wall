@@ -2,7 +2,7 @@
 <div class="walls">
 {{#each walls as |wall|}}
   <div class="wall--name">{{wall.name}}</div>
-  {{device-list devices=wall.devices}}
+  {{device-list devices=wall.devices wallId=wall.id}}
   {{#link-to 'device.new' wall.id}}Add Device{{/link-to}}
 {{/each}}
 </div>

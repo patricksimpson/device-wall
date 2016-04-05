@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  queryParams: ['wid'],
+  wid: null,
   slugify(str) {
     return str.toString().toLowerCase().trim()
       .replace(/&/g, '-and-')         // Replace & with 'and'
@@ -22,17 +24,14 @@ export default Ember.Controller.extend({
     },
     deleteDevice() {
       var device = this.get('model'),
-          wall = device.get('wall'),
           _this = this;
 
-      if (wall) {
-        this.store.findRecord('wall', wall.get('id')).then(function(data) {
-          data.get('devices').removeObject(device);
-          data.save();
-          device.destroyRecord();
-          _this.transitionToRoute('wall');
-        });
-      }
+      this.store.findRecord('wall', this.get('wid')).then(function(data) {
+        data.get('devices').removeObject(device);
+        data.save();
+        device.destroyRecord();
+        _this.transitionToRoute('wall');
+      });
 
     },
     cancel() {
