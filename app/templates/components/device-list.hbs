@@ -2,7 +2,7 @@
 <ul>
 {{#each devices as |device|}}
   <li>{{#link-to 'device' device.slug}}{{device.name}}{{/link-to}}
-  | {{#link-to 'device.index.edit' device.slug (query-params wid=wallId)}}Edit{{/link-to}}
+  | {{#link-to 'device.index.edit' device.slug (query-params wid=wallId r='false')}}Edit{{/link-to}}
   | (<a href="{{device.url}}">{{device.url}}</a>)</li>
 {{/each}}
 </ul>
