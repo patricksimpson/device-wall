@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import _ from 'lodash/lodash';
 
 export default Ember.Component.extend({
   looper: null,
@@ -7,27 +8,33 @@ export default Ember.Component.extend({
   referrer: window.document.referrer,
   redirectInit: function() {
     let redirect = this.get('redirectWait');
-    if (!Ember.isEmpty(this.get('device.url'))) {
-      if (!Ember.isEmpty(this.get('referrer'))) {
-        this.set('wait', 3000);
-        // If the redirect is not set, fall back
-        // on the default functionality.
-        if (Ember.isEmpty(redirect)) {
-          redirect = true;
-        } else {
-          if (!redirect) {
-            this.set('wait', redirect);
-          }
-        }
+    if (!_.isEmpty(this.get('device.url'))) {
+      if (!_.isEmpty(this.get('referrer'))) {
+        this.setWait(redirect, 3000);
       }
-      if (!this.get('isLocal') || redirect) {
-        console.log(redirect);
-        console.log(this.get('isLocal'));
+      if (!this.get('isLocal') || (redirect && redirect !== "false")) {
+        let tempWait = parseInt(redirect, 10);
+        if (_.isNumber(tempWait) && !_.isNaN(tempWait)) {
+          this.set('wait', tempWait);
+        }
+        console.log(this.get('wait'));
         // this.loop();
       } else {
         this.manual();
       }
     }
+  },
+  setWait(redirect, w) {
+    let waitTime = 0,
+        tempWait = parseInt(redirect, 10);
+    if (_.isEmpty(redirect) || !_.isNumber(tempWait) || redirect === true) {
+      waitTime = w;
+    } else {
+      if (_.isNumber(tempWait) && !_.isNaN(tempWait)) {
+        waitTime = tempWait;
+      }
+    }
+    this.set('wait', waitTime);
   },
   didRender() {
     Ember.run.later(this, function() {
