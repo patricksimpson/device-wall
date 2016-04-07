@@ -17,8 +17,7 @@ export default Ember.Component.extend({
         if (_.isNumber(tempWait) && !_.isNaN(tempWait)) {
           this.set('wait', tempWait);
         }
-        console.log(this.get('wait'));
-        // this.loop();
+        this.loop();
       } else {
         this.manual();
       }
