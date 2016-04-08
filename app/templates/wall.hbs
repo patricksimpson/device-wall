@@ -1,5 +1,6 @@
+<button {{action "toggleRedirect"}}>{{#if isRedirecting}}Disable redirecting{{else}}Enable redirecting{{/if}}</button>
 {{#if model}}
-  {{wall-list walls=model}}
+  {{wall-list walls=model isRedirecting=isRedirecting}}
 {{else}}
 <div class="danger">
   <p>You have no wall, add one.</p>
