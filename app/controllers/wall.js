@@ -6,6 +6,8 @@ export default Ember.Controller.extend({
     toggleRedirect() {
       let isRedirecting = !this.get('isRedirecting');
       this.set('isRedirecting', isRedirecting);
+      // Dirty hack.
+      window.document.deviceWallIsRedirecting = isRedirecting;
     }
   }
 });

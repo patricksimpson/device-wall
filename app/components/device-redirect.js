@@ -5,9 +5,11 @@ export default Ember.Component.extend({
   looper: null,
   wait: 0,
   isLocal: window.document.location.hostname === 'localhost',
+  isRedirectingOverride: Ember.computed(function() { return window.document.deviceWallIsRedirecting; }),
   referrer: window.document.referrer,
   redirectInit: function() {
-    let redirect = this.get('redirectWait');
+    let redirect = this.get('redirectWait'),
+        redirectOverride = this.get('isRedirectingOverride');
     if (!_.isEmpty(this.get('device.url'))) {
       if (!_.isEmpty(this.get('referrer'))) {
         this.setWait(redirect, 3000);
@@ -17,11 +19,13 @@ export default Ember.Component.extend({
         if (_.isNumber(tempWait) && !_.isNaN(tempWait)) {
           this.set('wait', tempWait);
         }
-        this.loop();
-      } else {
-        this.manual();
+        if (typeof redirectOverride === 'undefined' || (redirectOverride)) {
+          this.loop();
+          return true;
+        }
       }
     }
+    this.manual();
   },
   setWait(redirect, w) {
     let waitTime = 0,
