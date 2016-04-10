@@ -15,6 +15,9 @@ export default Ember.Controller.extend({
         });
         _this.transitionToRoute('wall');
       });
+    },
+    cancel() {
+      this.transitionToRoute('wall');
     }
   }
 });
