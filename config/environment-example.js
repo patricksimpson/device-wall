@@ -6,7 +6,7 @@ module.exports = function(environment) {
     environment: environment,
     contentSecurityPolicy: { 'connect-src': "'self' https://auth.firebase.com wss://*.firebaseio.com" },
     firebase: 'https://YOUR-FIREBASE-NAME.firebaseio.com/',
-    firebaseToken: 'your_custom_firebase_token',
+    firebaseSecret: 'your_custom_firebase_token',
     torii: {
       sessionServiceName: 'session'
     },
